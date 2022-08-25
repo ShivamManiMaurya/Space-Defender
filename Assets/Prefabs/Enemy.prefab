@@ -76,7 +76,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 21300000, guid: 82cac83d8edb7004c99f19559e7359c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
+  m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2.6666667, y: 2.6666667}
   m_AdaptiveModeThreshold: 0.5
@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1425917959233519003}
   - component: {fileID: -788417205905973047}
   - component: {fileID: 3084067550917049743}
+  - component: {fileID: -2431803632841453775}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -112,7 +113,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5536346704732500768}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -120,7 +121,7 @@ Transform:
   - {fileID: 4782738028936692273}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4558911468313244472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21efdfba4dd6fd44cb7d865e764bee5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 20
 --- !u!114 &3084067550917049743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,3 +197,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 25
+--- !u!114 &-2431803632841453775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5536346704732500768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038f4cac3225f4449bcd9626417639a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectilePrefab: {fileID: 980246990359314501, guid: 3d886b5f20fd09b46bc77b0bca77f512, type: 3}
+  _projectileSpeed: 10
+  _projectileLifeTime: 5
+  _firingRate: 0.5
+  isAI: 1
+  _baseFiringRate: 1
+  _firingRateVariance: 0.5
+  _minimumFiringRate: 0.1
+  isFiring: 0

@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private float _projectileSpeed = 10f;
     [SerializeField] private float _projectileLifeTime = 5f;
     [SerializeField] private float _firingRate = 1f;
 
-    public bool isFiring;
+    [Header("AI")]
+    [SerializeField] private bool isAI;
+    [SerializeField] private float _baseFiringRate, _firingRateVariance, _minimumFiringRate = 1;
+
+    [HideInInspector] public bool isFiring;
 
     private Coroutine _firingCoroutine;
 
     void Start()
     {
-        
+        // If isAI is true means this script is active on our enemies so firing is automatic
+        if (isAI)
+        {
+            isFiring = true;
+        }
     }
 
     void Update()
@@ -25,23 +34,68 @@ public class Shooter : MonoBehaviour
 
     private void Fire()
     {
-        if (isFiring)
+        if (isFiring && _firingCoroutine == null)
         {
             _firingCoroutine =  StartCoroutine(FireContinuously());
         }
-        else
+        else if (!isFiring && _firingCoroutine != null)
         {
             StopCoroutine(_firingCoroutine);
+            _firingCoroutine = null;
         }
     }
 
     IEnumerator FireContinuously()
     {
-        while(true)
+        while (true)
         {
-            Instantiate(_projectilePrefab, transform);
-            Destroy(_projectilePrefab, _firingRate);
+            GameObject instance;
+
+
+            if (isAI)
+            {
+                // Here the projectile is rotated 180 degrees so the projectile sprite is seen rotated
+                instance = Instantiate(_projectilePrefab, transform.position,
+                                                Quaternion.Euler(0, 0, 180));
+            }
+            else
+            {
+                // Here no rotation by Quaternion.identity so the projetile is not rotated
+                instance = Instantiate(_projectilePrefab, transform.position,
+                                                Quaternion.identity);
+            }
+
+            // Passing velocity to our projectile
+            Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.velocity = transform.up * _projectileSpeed;
+            }
+
+            // Destroying our projectile so it will get destroyed after some time
+            Destroy(instance, _projectileLifeTime);
+
+            if (isAI)
+            {
+                // Provoiding random firing rate for Enemy
+                yield return new WaitForSeconds(RandomFiringRateEnemy());
+            }
+            else
+            {
+                // Provoiding firing rate for Player
+                yield return new WaitForSeconds(_firingRate);
+            }
         }
+
+    }
+
+    // Method for Randomizing the Firing rate of enemy
+    private float RandomFiringRateEnemy()
+    {
+        float enemyFiringRate = Random.Range(_baseFiringRate - _firingRateVariance,
+                                             _baseFiringRate + _firingRateVariance);
+        enemyFiringRate = Mathf.Clamp(enemyFiringRate, _minimumFiringRate, float.MaxValue);
+        return enemyFiringRate;
     }
 
 }
