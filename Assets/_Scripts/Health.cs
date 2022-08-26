@@ -5,10 +5,17 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int health = 50;
+    [SerializeField] private bool _applyCameraShake;
 
     SpecialEffects specialEffects;
     AnimationManager animationManager;
-    bool playerIsDead = true, enemyIsDead = true;
+    CameraShake cameraShake;
+    bool playerIsDead = false, enemyIsDead = false;
+
+    private void Awake()
+    {
+        cameraShake = Camera.main.GetComponent<CameraShake>();
+    }
 
     private void Start()
     {
@@ -23,6 +30,7 @@ public class Health : MonoBehaviour
         if (damageDealer != null)
         {
             TakeDamage(damageDealer.GetDamage());
+            ShakeCamera();
             damageDealer.Hit();
         }
     }
@@ -31,21 +39,34 @@ public class Health : MonoBehaviour
     private void TakeDamage(int damage)
     {
         health -= damage;
+
         if (health <= 0)
         {
-            if (specialEffects != null && enemyIsDead)
-            {
-                specialEffects.PlayEnemyExplosion();
-                enemyIsDead = false;
-                Destroy(gameObject);
-            }
-            if (animationManager != null && playerIsDead)
-            {
-                animationManager.PlayPlayerDeathAnimation();
-                playerIsDead = false;
-                Destroy(gameObject, 1f);
-            }
-            
+            DeathEffects();
+        }
+    }
+
+    private void DeathEffects()
+    {
+        if (specialEffects != null && !enemyIsDead)
+        {
+            specialEffects.PlayEnemyExplosion();
+            enemyIsDead = true;
+            Destroy(gameObject);
+        }
+        if (animationManager != null && !playerIsDead)
+        {
+            animationManager.PlayPlayerDeathAnimation();
+            playerIsDead = true;
+            Destroy(gameObject, 1f);
+        }
+    }
+
+    private void ShakeCamera()
+    {
+        if (cameraShake != null && _applyCameraShake)
+        {
+            cameraShake.Play();
         }
     }
 
