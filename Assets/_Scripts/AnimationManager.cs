@@ -16,14 +16,9 @@ public class AnimationManager : MonoBehaviour
 
     public void PlayPlayerDeathAnimation()
     {
-        //if (playerDeath != null)
-        //{
-        //anim.Play("playerDeath", 0, 0.0f);
-        //}
         if (animator != null)
         {
             animator.SetTrigger("Death");
-            Debug.Log("Death animation condition is working");
         }
     }
 
