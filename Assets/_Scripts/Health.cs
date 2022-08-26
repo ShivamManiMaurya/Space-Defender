@@ -6,12 +6,20 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private int health = 50;
     [SerializeField] private bool _applyCameraShake;
+    [SerializeField] private int _enemyDiePoints = 100;
 
     SpecialEffects specialEffects;
     AnimationManager animationManager;
     CameraShake cameraShake;
     AudioPlayer audioPlayer;
+    ScoreKeeper scoreKeeper;
     bool playerIsDead = false, enemyIsDead = false;
+
+
+    public int GetHealth()
+    {
+        return health;
+    }
 
     private void Awake()
     {
@@ -23,7 +31,9 @@ public class Health : MonoBehaviour
     {
         specialEffects = GetComponent<SpecialEffects>();
         animationManager = GetComponentInChildren<AnimationManager>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -55,6 +65,7 @@ public class Health : MonoBehaviour
             specialEffects.PlayEnemyExplosion();
             enemyIsDead = true;
             audioPlayer.PlayEnemyDeathClip();
+            scoreKeeper.ModifyScore(_enemyDiePoints);
             Destroy(gameObject);
         }
         if (animationManager != null && !playerIsDead)
