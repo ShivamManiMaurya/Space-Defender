@@ -10,11 +10,13 @@ public class Health : MonoBehaviour
     SpecialEffects specialEffects;
     AnimationManager animationManager;
     CameraShake cameraShake;
+    AudioPlayer audioPlayer;
     bool playerIsDead = false, enemyIsDead = false;
 
     private void Awake()
     {
         cameraShake = Camera.main.GetComponent<CameraShake>();
+        audioPlayer = FindObjectOfType<AudioPlayer>();
     }
 
     private void Start()
@@ -52,12 +54,14 @@ public class Health : MonoBehaviour
         {
             specialEffects.PlayEnemyExplosion();
             enemyIsDead = true;
+            audioPlayer.PlayEnemyDeathClip();
             Destroy(gameObject);
         }
         if (animationManager != null && !playerIsDead)
         {
             animationManager.PlayPlayerDeathAnimation();
             playerIsDead = true;
+            audioPlayer.PlayPlayerDeathClip();
             Destroy(gameObject, 1f);
         }
     }

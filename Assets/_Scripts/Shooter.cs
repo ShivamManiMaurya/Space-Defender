@@ -17,6 +17,12 @@ public class Shooter : MonoBehaviour
     [HideInInspector] public bool isFiring;
 
     private Coroutine _firingCoroutine;
+    AudioPlayer audioPlayer;
+
+    private void Awake()
+    {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
 
     void Start()
     {
@@ -49,21 +55,7 @@ public class Shooter : MonoBehaviour
     {
         while (true)
         {
-            GameObject instance;
-
-
-            if (isAI)
-            {
-                // Here the projectile is rotated 180 degrees so the projectile sprite is seen rotated
-                instance = Instantiate(_projectilePrefab, transform.position,
-                                                Quaternion.Euler(0, 0, 180));
-            }
-            else
-            {
-                // Here no rotation by Quaternion.identity so the projetile is not rotated
-                instance = Instantiate(_projectilePrefab, transform.position,
-                                                Quaternion.identity);
-            }
+            GameObject instance = InstantiatingProjectile();
 
             // Passing velocity to our projectile
             Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
@@ -96,6 +88,28 @@ public class Shooter : MonoBehaviour
                                              _baseFiringRate + _firingRateVariance);
         enemyFiringRate = Mathf.Clamp(enemyFiringRate, _minimumFiringRate, float.MaxValue);
         return enemyFiringRate;
+    }
+
+    private GameObject InstantiatingProjectile()
+    {
+        GameObject instance;
+
+        if (isAI)
+        {
+            // Here the projectile is rotated 180 degrees so the projectile sprite is seen rotated
+            instance = Instantiate(_projectilePrefab, transform.position,
+                                            Quaternion.Euler(0, 0, 180));
+            audioPlayer.PlayEnemyShootingClip();
+        }
+        else
+        {
+            // Here no rotation by Quaternion.identity so the projetile is not rotated
+            instance = Instantiate(_projectilePrefab, transform.position,
+                                            Quaternion.identity);
+            audioPlayer.PlayPlayerShootingClip();
+        }
+
+        return instance;
     }
 
 }
