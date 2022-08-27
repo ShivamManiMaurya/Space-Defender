@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
     CameraShake cameraShake;
     AudioPlayer audioPlayer;
     ScoreKeeper scoreKeeper;
+    UIDisplay uiDisplay;
     bool playerIsDead = false, enemyIsDead = false;
 
 
@@ -25,13 +26,16 @@ public class Health : MonoBehaviour
     {
         cameraShake = Camera.main.GetComponent<CameraShake>();
         audioPlayer = FindObjectOfType<AudioPlayer>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        uiDisplay = FindObjectOfType<UIDisplay>();
     }
 
     private void Start()
     {
         specialEffects = GetComponent<SpecialEffects>();
         animationManager = GetComponentInChildren<AnimationManager>();
-        scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        uiDisplay.UpdateHealth();
+        uiDisplay.UpdateScore();
     }
 
 
@@ -66,6 +70,7 @@ public class Health : MonoBehaviour
             enemyIsDead = true;
             audioPlayer.PlayEnemyDeathClip();
             scoreKeeper.ModifyScore(_enemyDiePoints);
+            uiDisplay.UpdateScore();
             Destroy(gameObject);
         }
         if (animationManager != null && !playerIsDead)
@@ -82,6 +87,7 @@ public class Health : MonoBehaviour
         if (cameraShake != null && _applyCameraShake)
         {
             cameraShake.Play();
+            uiDisplay.UpdateHealth();
         }
     }
 
