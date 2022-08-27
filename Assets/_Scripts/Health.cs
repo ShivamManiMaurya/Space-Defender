@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
     AudioPlayer audioPlayer;
     ScoreKeeper scoreKeeper;
     UIDisplay uiDisplay;
+    LevelManager levelManager;
     bool playerIsDead = false, enemyIsDead = false;
 
 
@@ -28,6 +29,7 @@ public class Health : MonoBehaviour
         audioPlayer = FindObjectOfType<AudioPlayer>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
         uiDisplay = FindObjectOfType<UIDisplay>();
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     private void Start()
@@ -78,6 +80,7 @@ public class Health : MonoBehaviour
             animationManager.PlayPlayerDeathAnimation();
             playerIsDead = true;
             audioPlayer.PlayPlayerDeathClip();
+            levelManager.LoadGameOver();
             Destroy(gameObject, 1f);
         }
     }
