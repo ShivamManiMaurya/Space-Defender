@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 82cac83d8edb7004c99f19559e7359c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 59c0ae5920de955408a24437d1a3428c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: -2431803632841453775}
   - component: {fileID: -276991450308600441}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: Enemy 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,9 +169,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.04}
+  m_Offset: {x: 0, y: 0.05}
   serializedVersion: 2
-  m_Radius: 0.4485952
+  m_Radius: 0.56673497
 --- !u!114 &-788417205905973047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21efdfba4dd6fd44cb7d865e764bee5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 50
   _applyCameraShake: 0
   _enemyDiePoints: 100
 --- !u!114 &3084067550917049743
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b726a32448b65ae49b6fddc129b21cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 25
+  _damage: 50
 --- !u!114 &-2431803632841453775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,9 +213,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 980246990359314501, guid: 3d886b5f20fd09b46bc77b0bca77f512, type: 3}
-  _projectileSpeed: 10
-  _projectileLifeTime: 5
-  _firingRate: 0.5
+  _projectileSpeed: 15
+  _projectileLifeTime: 3
+  _firingRate: 0.3
   isAI: 1
   _baseFiringRate: 1
   _firingRateVariance: 0.5

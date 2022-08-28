@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 677422825217656332}
-  - component: {fileID: 773170766}
   - component: {fileID: 773170767}
   - component: {fileID: -456572683325607653}
   - component: {fileID: 5353438029588942253}
+  - component: {fileID: 773170766}
   - component: {fileID: 7283562589110149653}
   - component: {fileID: -3152603355964483893}
   m_Layer: 6
@@ -38,23 +38,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &773170766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4495099370916655200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cac8a632ac6462548b9db1141dc90022, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _paddingLeft: 0.5
-  _paddingRight: 0.5
-  _paddingTop: 0.5
-  _paddingBottom: 0.5
 --- !u!114 &773170767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +105,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.10427624}
   serializedVersion: 2
   m_Radius: 0.39572376
+--- !u!114 &773170766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4495099370916655200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac8a632ac6462548b9db1141dc90022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 10
+  _paddingLeft: 0.5
+  _paddingRight: 0.5
+  _paddingTop: 0.5
+  _paddingBottom: 0.5
 --- !u!114 &7283562589110149653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   _applyCameraShake: 1
+  _enemyDiePoints: 100
 --- !u!114 &-3152603355964483893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 980246990359314501, guid: 8e6c7bf1f067b114287135e10296cf1e, type: 3}
-  _projectileSpeed: 10
+  _projectileSpeed: 15
   _projectileLifeTime: 5
   _firingRate: 2
   isAI: 0
