@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
 {
-    //[SerializeField] AnimationClip playerDeath;
-
     private Animator animator;
 
     private void Start()
@@ -19,6 +17,14 @@ public class AnimationManager : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("Death");
+        }
+    }
+
+    public void PlayPlayerHitAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("GotHit");
         }
     }
 

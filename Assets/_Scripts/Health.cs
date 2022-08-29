@@ -91,6 +91,7 @@ public class Health : MonoBehaviour
         {
             cameraShake.Play();
             uiDisplay.UpdateHealth();
+            animationManager.PlayPlayerHitAnimation();
         }
     }
 
