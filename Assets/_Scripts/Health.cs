@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
 
     SpecialEffects specialEffects;
     AnimationManager animationManager;
+    EnemyAnimationManager enemyAnimationManager;
     CameraShake cameraShake;
     AudioPlayer audioPlayer;
     ScoreKeeper scoreKeeper;
@@ -36,6 +37,7 @@ public class Health : MonoBehaviour
     {
         specialEffects = GetComponent<SpecialEffects>();
         animationManager = GetComponentInChildren<AnimationManager>();
+        enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
         uiDisplay.UpdateHealth();
         uiDisplay.UpdateScore();
     }
@@ -47,6 +49,10 @@ public class Health : MonoBehaviour
 
         if (damageDealer != null)
         {
+            if (enemyAnimationManager != null)
+            {
+                enemyAnimationManager.PlayEnemyHitAnimation();
+            }
             TakeDamage(damageDealer.GetDamage());
             ShakeCamera();
             damageDealer.Hit();

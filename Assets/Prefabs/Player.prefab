@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21efdfba4dd6fd44cb7d865e764bee5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 100
   _applyCameraShake: 1
   _enemyDiePoints: 100
 --- !u!114 &-3152603355964483893
@@ -152,7 +152,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 980246990359314501, guid: 8e6c7bf1f067b114287135e10296cf1e, type: 3}
   _projectileSpeed: 15
   _projectileLifeTime: 5
-  _firingRate: 2
+  _firingRate: 0.2
   isAI: 0
   _baseFiringRate: 0
   _firingRateVariance: 0
