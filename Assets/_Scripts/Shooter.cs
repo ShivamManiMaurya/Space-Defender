@@ -18,12 +18,10 @@ public class Shooter : MonoBehaviour
 
     private Coroutine _firingCoroutine;
     AudioPlayer audioPlayer;
-    PlayerBullet playerBullet;
 
     private void Awake()
     {
         audioPlayer = FindObjectOfType<AudioPlayer>();
-        playerBullet = GetComponentInChildren<PlayerBullet>();
     }
 
     void Start()
@@ -109,7 +107,6 @@ public class Shooter : MonoBehaviour
             instance = Instantiate(_projectilePrefab, transform.position,
                                             Quaternion.identity);
             audioPlayer.PlayPlayerShootingClip();
-            //playerBullet.PlayPlayerBulletAnimation();
         }
 
         return instance;
