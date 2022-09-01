@@ -31,11 +31,11 @@ public class Health : MonoBehaviour
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
         uiDisplay = FindObjectOfType<UIDisplay>();
         levelManager = FindObjectOfType<LevelManager>();
+        specialEffects = GetComponent<SpecialEffects>();
     }
 
     private void Start()
     {
-        specialEffects = GetComponent<SpecialEffects>();
         animationManager = GetComponentInChildren<AnimationManager>();
         enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
         uiDisplay.UpdateHealth();
@@ -80,6 +80,7 @@ public class Health : MonoBehaviour
             scoreKeeper.ModifyScore(_enemyDiePoints);
             uiDisplay.UpdateScore();
             Destroy(gameObject);
+            Debug.Log("Sabkuch chala");
         }
         if (animationManager != null && !playerIsDead)
         {
