@@ -47,16 +47,44 @@ public class Health : MonoBehaviour
     {
         DamageDealer damageDealer = collision.GetComponent<DamageDealer>();
 
-        if (damageDealer != null)
+        if (damageDealer != null && collision.CompareTag("PlayerProjectile"))
         {
             if (enemyAnimationManager != null)
             {
                 enemyAnimationManager.PlayEnemyHitAnimation();
             }
             TakeDamage(damageDealer.GetDamage());
+            damageDealer.Hit();
+        }
+
+        if (damageDealer != null && collision.CompareTag("EnemyProjectile"))
+        {
+            TakeDamage(damageDealer.GetDamage());
             ShakeCamera();
             damageDealer.Hit();
         }
+        
+        if (collision.CompareTag("Player"))
+        {
+            //if (enemyAnimationManager != null)
+            //{
+            //    enemyAnimationManager.PlayEnemyHitAnimation();
+            //}
+            TakeDamage(damageDealer.GetDamage());
+            ShakeCamera();
+            EnemyDeathWhenCollision();
+        }
+    }
+
+    private void EnemyDeathWhenCollision()
+    {
+        Debug.Log("takar ka chala");
+        specialEffects.PlayEnemyExplosion();
+        audioPlayer.PlayEnemyDeathClip();
+        scoreKeeper.ModifyScore(_enemyDiePoints);
+        uiDisplay.UpdateScore();
+        Debug.Log("Baad ka code chala");
+        Destroy(gameObject);
     }
 
 
@@ -74,13 +102,14 @@ public class Health : MonoBehaviour
     {
         if (specialEffects != null && !enemyIsDead)
         {
+            Debug.Log("Sabkuch chala");
             specialEffects.PlayEnemyExplosion();
             enemyIsDead = true;
             audioPlayer.PlayEnemyDeathClip();
             scoreKeeper.ModifyScore(_enemyDiePoints);
             uiDisplay.UpdateScore();
             Destroy(gameObject);
-            Debug.Log("Sabkuch chala");
+            
         }
         if (animationManager != null && !playerIsDead)
         {
